@@ -8,43 +8,15 @@ namespace MultimediaProject
 {
     internal class MediaPlayer
     {
-        
-        private List<Multimedia> PlayList = new List<Multimedia>();
-        private bool state = true;
-        private int index = 1;
+
+        public List<Multimedia> PlayList = new List<Multimedia>();
+        public bool state = true;
+        public int index = 1;
+        public string[] StopResume = new string[2] { "(S)\tStop", "(R)\tResume" };
 
         public bool Reproduction()
         {
-            string input = "";
-            do
-            {
-                Console.BackgroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("E' in riproduzione: " + this.PlayList[this.index-1].ToString());
-                Console.ResetColor();
-                Console.WriteLine("-----------------------------------------------------");
-                Console.WriteLine("(N)\tNext Song\n(P)\tPreview Song\n(S)\tStop");
-                Console.WriteLine("-----------------------------------------------------");
-                Console.WriteLine("Premere E se si vuole uscire");
-                input = (input = Console.ReadLine()) != null ? input : "x";
-            } while (input.ToUpper() is not "N" and not "P" and not "S" and not "E");
-
-            switch (input.ToUpper()) 
-            {
-                case "N":
-                    this.Next();
-                break; 
-                case "P":
-                    this.Preview();
-                break; 
-                case "S":
-                    Console.WriteLine("\nStop");
-                    this.Stop();
-                break;
-                case "E":
-                    return false;
-                //break;
-            }
-            return true;
+            return Utility.Reproduction(this);
         }
 
         public void AddList (Multimedia file) 
